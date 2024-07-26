@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  --yellow: #ffe600;
+
+  --white: #fff;
+
+  --gray-500: #EBEBEB;
+  --gray-700: #636363;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+html, body {
+  background-color: var(--gray-500);
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: unset;
+}
+
+header {  
+  height: 70px;
+  display: flex;
+  align-items: center;
+
+  background-color: var(--yellow);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: var(--gray-700);
+}
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--white);
+}
+
+.product-details {
+  padding: 20px 0;
+}
