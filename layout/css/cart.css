@@ -7,7 +7,7 @@
 
 .dsc-cart-item-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 0 20px;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .dsc-cart-item-right {
-  padding: 10px 0;
+  padding-bottom: 10px;
 }
 
 .dsc-cart-item-right span {
@@ -61,7 +61,24 @@
 }
 
 .dsc-cart-total-container h3 {
-  text-align: right;
+  text-align: left;
   font-size: 16px;
   color: var(--green);
+}
+
+@media (min-width: 576px) {
+
+  .dsc-cart-item-container {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .dsc-cart-item-right {
+    padding: 10px 0;
+  }
+    
+  .dsc-cart-total-container h3 {
+    text-align: right;
+  }
+    
 }
