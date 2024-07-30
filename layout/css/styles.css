@@ -44,6 +44,10 @@ a, a:hover {
   margin-bottom: 20px;
 }
 
+.dsc-mt-20 {
+  margin-top: 20px;
+}
+
 /****************/
 
 /* Header Styles */
@@ -129,6 +133,20 @@ nav a {
   color:  var(--blue);
   border: 1px solid var(--blue);
   background-color: var(--white);
+}
+
+.dsc-btn-next-page {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid var(--blue);
+}
+
+.dsc-btn-next-page span {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue);
 }
 
 /****************/
