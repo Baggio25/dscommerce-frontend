@@ -263,6 +263,24 @@ nav a {
   color: var(--red);
 }
 
+.dsc-select option[disabled] {
+  display: none;
+}
+
+.dsc-select:invalid {
+  color: var(--gray-500);
+}
+
+.dsc-select option {
+  color: var(--gray-600);
+}
+
+.dsc-textarea {
+  resize: none;
+  height: 120px;
+  padding-top: 10px;
+}
+
 @media (min-width: 576px) {
 
   .dsc-form h2 {
