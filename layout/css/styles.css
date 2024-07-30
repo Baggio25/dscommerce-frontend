@@ -3,6 +3,7 @@
 :root {
   --yellow: #ffe600;
   --white: #fff;
+  --green-light: #b3f5b9;
   --green: #0CAF1D;
   --blue: #3483FA;
   --red: #f33;
@@ -77,6 +78,17 @@ nav h1 {
 nav a {
   font-size: 14px;
   font-weight: 700;
+  color: var(--gray-600);
+}
+
+.dsc-logged-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.dsc-logged-user p {
+  font-size: 12px;
   color: var(--gray-600);
 }
 
