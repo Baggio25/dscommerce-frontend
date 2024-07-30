@@ -3,3 +3,34 @@
 .dsc-catalog-section {
   padding: 20px 0;
 }
+
+.dsc-catalog-cards {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+}
+
+.dsc-catalog-card-top {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.dsc-catalog-card-top img {
+  width: 150px;
+  height: 150px;
+}
+
+.dsc-catalog-card-bottom {
+  padding: 10px 20px;  
+}
+
+.dsc-catalog-card-bottom h3 {
+  font-size: 20px;
+  color: var(--green);
+}
+
+.dsc-catalog-card-bottom h4 {
+  font-size: 12px;
+  color: var(--gray-600);
+}
