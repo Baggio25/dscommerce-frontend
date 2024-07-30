@@ -22,6 +22,7 @@
 }
 
 .dsc-catalog-card-bottom {
+  min-height: 110px;
   padding: 10px 20px;  
 }
 
