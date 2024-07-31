@@ -177,18 +177,6 @@ nav a {
   width: 100%;
 }
 
-.dsc-btn-blue {
-  border: none;
-  color: var(--white);
-  background-color: var(--blue);
-}
-
-.dsc-btn-white {
-  color: var(--blue);
-  border: 1px solid var(--blue);
-  background-color: var(--white);
-}
-
 .dsc-btn-next-page {
   padding: 10px;
   border-radius: 4px;

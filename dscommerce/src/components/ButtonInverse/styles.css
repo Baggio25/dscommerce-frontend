@@ -1,0 +1,6 @@
+
+.dsc-btn-white {
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  background-color: var(--white);
+}
