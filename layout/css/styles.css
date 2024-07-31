@@ -325,4 +325,44 @@ nav a {
   border-top: 1px solid var(--gray-500);
 }
 
+.dsc-table td:nth-child(2) {
+  padding-left: 10px;
+}
+
+.dsc-table td:last-child {
+  padding-right: 10px;
+}
+
+.dsc-tb576 {
+  display: none;
+}
+
+.dsc-tb768 {
+  display: none;
+}
+
+@media (min-width: 567px) {
+  .dsc-table td:nth-child(2) {
+    padding-left: 0;
+  }
+
+  .dsc-table th:nth-child(1) {
+    padding-left: 20px;
+  }
+
+  .dsc-table td:nth-child(1) {
+    padding-left: 20px;
+  }
+
+  .dsc-tb576 {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 768px) {
+  .dsc-tb768 {
+    display: table-cell;
+  }
+}
+
 /****************/
