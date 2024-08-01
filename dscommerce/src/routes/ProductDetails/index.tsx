@@ -3,7 +3,7 @@ import ButtonPrimary from "../../components/ButtonPrimary";
 import ButtonInverse from "../../components/ButtonInverse";
 import ProductDetailsCard from "../../components/ProductDetailsCard";
 
-import { ProductDTO } from "../../models/Product";
+import { ProductDTO } from "../../models/product";
 
 import "./styles.css";
 
