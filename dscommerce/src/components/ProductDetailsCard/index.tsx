@@ -1,5 +1,5 @@
 
-import { ProductDTO } from "../../models/Product";
+import { ProductDTO } from "../../models/product";
 import ProductCategory from "../ProductCategory";
 
 import './styles.css';
