@@ -12,8 +12,8 @@ function App() {
           <Route index element={<Catalog />} />
           <Route path="catalog" element={<Catalog />} />
           <Route path="product-details/:productId" element={<ProductDetails />} />
-          <Route path="*" element={<Navigate to="/" />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
 
