@@ -23,9 +23,11 @@ export function addProduct(product: ProductDTO) {
   }
 }
 
-/*export function clearCart() {}
+export function clearCart() {
+  cartRepository.clear();
+}
 
-
+/*
 export function increaseItem(productId: number) {}
 
 export function decreaseItem(productId: number) {}

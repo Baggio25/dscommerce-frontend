@@ -1,20 +1,31 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import * as cartService from "../../../services/cart-service";
 import { OrderDTO } from "../../../models/order";
+import * as cartService from "../../../services/cart-service";
+
+import ButtonPrimary from "../../../components/ButtonPrimary";
+import ButtonInverse from "../../../components/ButtonInverse";
+import ButtonInverseCaution from "../../../components/ButtonInverseCaution";
 
 import "./styles.css";
-import { Link } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
+
+  function handleClearClick() {
+    cartService.clearCart();
+    setCart(cartService.getCart());
+  }
 
   return (
     <main>
       <section className="dsc-container dsc-cart-container-section">
         {cart.items.length === 0 ? (
           <div>
-            <h2 className="dsc-section-title dsc-mb-20">Seu carrinho está vazio!</h2>
+            <h2 className="dsc-section-title dsc-mb-20">
+              Seu carrinho está vazio!
+            </h2>
           </div>
         ) : (
           <div className="dsc-card dsc-mb-20">
@@ -47,11 +58,17 @@ export default function Cart() {
         )}
 
         <div className="dsc-btn-page-container">
-          <div className="dsc-btn dsc-btn-blue">Finalizar Pedido</div>
-          
+          <ButtonPrimary text="Finalizar Pedido"></ButtonPrimary>
+
           <Link to="/catalog">
-            <div className="dsc-btn dsc-btn-white" >Continuar Comprando</div>
+            <ButtonInverse text="Continuar Comprando"></ButtonInverse>
           </Link>
+
+          { cart.items.length > 0 && (
+            <div onClick={handleClearClick}>
+              <ButtonInverseCaution text="Limpar Carrinho"></ButtonInverseCaution>
+            </div>
+          )}
         </div>
       </section>
     </main>
