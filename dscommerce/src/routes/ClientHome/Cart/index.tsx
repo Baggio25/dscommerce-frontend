@@ -4,6 +4,7 @@ import * as cartService from "../../../services/cart-service";
 import { OrderDTO } from "../../../models/order";
 
 import "./styles.css";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
@@ -34,20 +35,23 @@ export default function Cart() {
                   </div>
                 </div>
                 <div className="dsc-cart-item-right">
-                  <span>R$ {item.subTotal}</span>
+                  <span>R$ {item.subTotal.toFixed(2)}</span>
                 </div>
               </div>
             ))}
 
             <div className="dsc-cart-total-container">
-              <h3>R$ {cart.total}</h3>
+              <h3>R$ {cart.total.toFixed(2)}</h3>
             </div>
           </div>
         )}
 
         <div className="dsc-btn-page-container">
           <div className="dsc-btn dsc-btn-blue">Finalizar Pedido</div>
-          <div className="dsc-btn dsc-btn-white">Continuar Comprando</div>
+          
+          <Link to="/catalog">
+            <div className="dsc-btn dsc-btn-white" >Continuar Comprando</div>
+          </Link>
         </div>
       </section>
     </main>
