@@ -7,6 +7,7 @@ import ProductDetailsCard from "../../../components/ProductDetailsCard";
 
 import { ProductDTO } from "../../../models/product";
 import * as productService from "../../../services/product-service";
+import * as cartService from "../../../services/cart-service";
 
 import "./styles.css";
 
@@ -26,6 +27,13 @@ export default function ProductDetails() {
         navigate("/");
       });
   }, []);
+  
+  function handleBuyClick() {
+    if (product) {
+      cartService.addProduct(product);
+      navigate("/cart");
+    }
+  }
 
 
   return (
@@ -36,7 +44,9 @@ export default function ProductDetails() {
         }
 
         <div className="dsc-btn-page-container">
-          <ButtonPrimary text="Comprar" />
+          <div onClick={handleBuyClick}>
+            <ButtonPrimary text="Comprar" />
+          </div>
 
           <Link to="/">
             <ButtonInverse text="Início" />
