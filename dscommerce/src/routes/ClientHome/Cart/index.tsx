@@ -27,6 +27,14 @@ export default function Cart() {
     console.log("Carrinho: " + cartService.getCart().items);
   }
 
+  function handleDecreaseItem(productId : number) {
+    cartService.decreaseItem(productId);
+    console.log("Acrescentou no localstorage: " + productId);
+    
+    setCart(cartService.getCart());
+    console.log("Carrinho: " + cartService.getCart().items);
+  }
+
   return (
     <main>
       <section className="dsc-container dsc-cart-container-section">
@@ -48,7 +56,8 @@ export default function Cart() {
                   <div className="dsc-cart-item-description">
                     <h3>{item.name}</h3>
                     <div className="dsc-cart-item-quantity-container">
-                      <div className="dsc-cart-item-quantity-btn">-</div>
+                      <div className="dsc-cart-item-quantity-btn"
+                            onClick={() => handleDecreaseItem(item.productId)}>-</div>
                       <p>{item.quantity}</p>
                       <div className="dsc-cart-item-quantity-btn" 
                            onClick={() => handleIncreaseItem(item.productId)}>+</div>
