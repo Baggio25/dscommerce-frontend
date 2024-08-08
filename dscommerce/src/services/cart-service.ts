@@ -1,5 +1,5 @@
 import { OrderDTO, OrderItemDTO } from "../models/order";
-//import { ProductDTO } from "../models/product";
+import { ProductDTO } from "../models/product";
 
 import * as cartRepository from "../localStorage/cart-repository";
 
