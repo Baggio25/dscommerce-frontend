@@ -21,14 +21,25 @@ export function addProduct(product: ProductDTO) {
     
     cartRepository.save(cart);
   }
+
 }
 
 export function clearCart() {
   cartRepository.clear();
 }
 
+export function increaseItem(productId: number) {
+  const cart = cartRepository.get();
+  const item = cart.items.find(i => i.productId === productId);
+
+  if(item) {
+    item.quantity++;
+    cartRepository.save(cart);
+  }
+
+}
+
 /*
-export function increaseItem(productId: number) {}
 
 export function decreaseItem(productId: number) {}
 */

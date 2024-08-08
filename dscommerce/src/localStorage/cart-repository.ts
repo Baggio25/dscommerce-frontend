@@ -12,7 +12,7 @@ export function get(): OrderDTO {
   const cart = new OrderDTO();
   obj.items.forEach((item) => {
     cart.items.push(
-      new OrderItemDTO(item.productId, 1, item.name, item.price, item.imgUrl)
+      new OrderItemDTO(item.productId, item.quantity, item.name, item.price, item.imgUrl)
     );
   });
 

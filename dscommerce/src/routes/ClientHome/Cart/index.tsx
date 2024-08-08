@@ -11,11 +11,20 @@ import ButtonInverseCaution from "../../../components/ButtonInverseCaution";
 import "./styles.css";
 
 export default function Cart() {
+
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
 
   function handleClearClick() {
     cartService.clearCart();
     setCart(cartService.getCart());
+  }
+
+  function handleIncreaseItem(productId : number) {
+    cartService.increaseItem(productId);
+    console.log("Acrescentou no localstorage: " + productId);
+    
+    setCart(cartService.getCart());
+    console.log("Carrinho: " + cartService.getCart().items);
   }
 
   return (
@@ -41,7 +50,8 @@ export default function Cart() {
                     <div className="dsc-cart-item-quantity-container">
                       <div className="dsc-cart-item-quantity-btn">-</div>
                       <p>{item.quantity}</p>
-                      <div className="dsc-cart-item-quantity-btn">+</div>
+                      <div className="dsc-cart-item-quantity-btn" 
+                           onClick={() => handleIncreaseItem(item.productId)}>+</div>
                     </div>
                   </div>
                 </div>
