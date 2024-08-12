@@ -9,34 +9,40 @@ import * as productService from "../../../services/product-service";
 
 import "./styles.css";
 
-export default function Catalog() {
+type QueryParams = {
+  page: number;
+  name: string;
+};
 
+export default function Catalog() {
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
-  const [productName, setProductName] = useState("");
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page: 0,
+    name: "",
+  });
 
   useEffect(() => {
-    productService.findPageRequest(0, productName)
-      .then(response => {
+    productService
+      .findPageRequest(queryParams.page, queryParams.name)
+      .then((response) => {
         setProducts(response.data.content);
-      })
-  }, [productName]);
+      });
+  }, [queryParams]);
 
   function handleSearch(searchText: string) {
-    setProductName(searchText);
+    setQueryParams({ ...queryParams, name: searchText });
   }
 
   return (
     <main>
       <section className="dsc-container dsc-catalog-section">
-        <SearchBar onSearch={handleSearch}/>
+        <SearchBar onSearch={handleSearch} />
 
         <div className="dsc-mb-20 dsc-mt-20 dsc-catalog-cards">
-          {
-            products.map(
-              product => <CatalogCard key={product.id} product={product} />
-            )
-          }
+          {products.map((product) => (
+            <CatalogCard key={product.id} product={product} />
+          ))}
         </div>
 
         <ButtonNextPage />
