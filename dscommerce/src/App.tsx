@@ -5,6 +5,7 @@ import ClientHome from "./routes/ClientHome";
 import ProductDetails from "./routes/ClientHome/ProductDetails";
 import Catalog from "./routes/ClientHome/Catalog";
 import Cart from "./routes/ClientHome/Cart";
+import Login from "./routes/ClientHome/Login";
 
 import { ContextCartCount } from "./utils/context-cart";
 
@@ -17,7 +18,7 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ClientHome />}>
+          <Route path="/" element={<ClientHome />}>            
             <Route index element={<Catalog />} />
             <Route path="catalog" element={<Catalog />} />
             <Route
@@ -25,6 +26,7 @@ function App() {
               element={<ProductDetails />}
             />
             <Route path="cart" element={<Cart />} />
+            <Route path="login" element={<Login />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
