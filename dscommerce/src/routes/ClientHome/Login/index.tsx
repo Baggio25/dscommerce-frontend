@@ -8,15 +8,24 @@ import { CredentialsDTO } from "../../../models/auth";
 import "./styles.css";
 
 export default function Login() {
-
   const [formData, setFormData] = useState<CredentialsDTO>({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
 
   function handleSubmit(event: any) {
-    event.preventDefault();    
+    event.preventDefault();
     loginRequest(formData);
+  }
+
+  function handleInputChange(event: any) {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setFormData({
+      ...formData,
+      [name]: value
+    })
   }
 
   return (
@@ -32,20 +41,26 @@ export default function Login() {
                   className="dsc-form-control"
                   type="text"
                   placeholder="E-mail"
+                  name="username"
                   autoFocus
-                />
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  />
               </div>
               <div>
                 <input
                   className="dsc-form-control"
                   type="password"
                   placeholder="Senha"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
 
             <div className="dsc-mt-20 dsc-login-form-buttons">
-              <button type="submit" className="dsc-btn dsc-btn-blue" >
+              <button type="submit" className="dsc-btn dsc-btn-blue">
                 Entrar
               </button>
             </div>
