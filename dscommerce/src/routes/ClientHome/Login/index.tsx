@@ -15,7 +15,13 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    loginRequest(formData);
+    loginRequest(formData)
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log("Erro no login ", error)
+      })
   }
 
   function handleInputChange(event: any) {
