@@ -133,6 +133,10 @@ nav a {
   margin-right: 20px;
 }
 
+.dsc-menu-item a {
+  display: flex;
+}
+
 .dsc-logged-user {
   display: flex;
   flex-direction: column;
