@@ -1,38 +1,41 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { OrderDTO } from "../../../models/order";
-import * as cartService from "../../../services/cart-service";
 
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonInverseCaution from "../../../components/ButtonInverseCaution";
+
+import { OrderDTO } from "../../../models/order";
+import { ContextCartCount } from "../../../utils/context-cart";
+
+import * as cartService from "../../../services/cart-service";
 
 import "./styles.css";
 
 export default function Cart() {
 
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
+  const { setContextCartCount } = useContext(ContextCartCount);
 
   function handleClearClick() {
     cartService.clearCart();
-    setCart(cartService.getCart());
+    updateCart();
   }
 
   function handleIncreaseItem(productId : number) {
-    cartService.increaseItem(productId);
-    console.log("Acrescentou no localstorage: " + productId);
-    
+    cartService.increaseItem(productId); 
     setCart(cartService.getCart());
-    console.log("Carrinho: " + cartService.getCart().items);
   }
 
   function handleDecreaseItem(productId : number) {
     cartService.decreaseItem(productId);
-    console.log("Acrescentou no localstorage: " + productId);
-    
-    setCart(cartService.getCart());
-    console.log("Carrinho: " + cartService.getCart().items);
+    updateCart();
+  }
+
+  function updateCart() {
+    const newCart = cartService.getCart();
+    setCart(newCart);
+    setContextCartCount(newCart.items.length);
   }
 
   return (
