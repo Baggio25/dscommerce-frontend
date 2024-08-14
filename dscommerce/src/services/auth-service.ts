@@ -5,6 +5,8 @@ import { CredentialsDTO } from "../models/auth";
 import { CLIENT_ID, CLIENT_SECRET } from "../utils/system";
 import { requestBackend } from "../utils/requests";
 
+import * as accessTokenRepository from "../localStorage/access-token-repository";
+
 export function loginRequest(loginData: CredentialsDTO) {
 
   //Cabeçalhos
@@ -28,4 +30,16 @@ export function loginRequest(loginData: CredentialsDTO) {
   };
 
   return requestBackend(config);
+}
+
+export function logout() {
+  accessTokenRepository.remove();
+}
+
+export function saveAccessToken(token : string) {
+  accessTokenRepository.save(token);
+}
+
+export function getAccessToken() : string | null {
+  return accessTokenRepository.get();
 }

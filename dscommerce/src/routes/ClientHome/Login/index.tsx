@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { loginRequest } from "../../../services/auth-service";
+import * as authService from "../../../services/auth-service";
 import { CredentialsDTO } from "../../../models/auth";
 
 import "./styles.css";
@@ -15,7 +15,7 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    loginRequest(formData)
+    authService.loginRequest(formData)
       .then(response => {
         console.log(response.data)
       })
