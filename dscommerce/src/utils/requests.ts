@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 import { BASE_URL } from "./system";
+import { history } from "./history";
 
 import * as authService from "../services/auth-service";
 
@@ -35,11 +36,11 @@ axios.interceptors.response.use(
   },
   function (error) {
     if(error.response.status === 401) {
-      console.log('deu 401')
+      history.push("/login");
     }
-
+    
     if(error.response.status === 403) {
-      console.log('deu 403')
+      history.push("/");
     }
 
     // DO SOMETHING WITH RESPONSE ERROR
