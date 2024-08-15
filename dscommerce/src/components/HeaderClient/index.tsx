@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { ContextToken } from "../../utils/context-token";
+import { LoggedUser } from "../LoggedUser";
 import CartIcon from "../CartIcon";
 
 import * as authService from "../../services/auth-service";
@@ -36,7 +37,7 @@ export default function HeaderClient() {
                 </div>
               </Link>
 
-              <Link to="/login">Entrar</Link>
+              <LoggedUser />
             </div>
           </div>
         </nav>

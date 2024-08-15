@@ -1,4 +1,6 @@
 
+import { LoggedUser } from "../LoggedUser";
+
 import productImg from "../../assets/images/products.svg";
 import homeImg from "../../assets/images/home.svg";
 
@@ -20,10 +22,7 @@ export default function HeaderAdmin() {
               </div>
             </div>
             
-            <div className="dsc-logged-user">
-              <p>Olá Maria Silva</p>
-              <a href="#">Sair</a>
-            </div>
+            <LoggedUser />
           </div>
         </nav>
       </header>
