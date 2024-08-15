@@ -1,3 +1,8 @@
+.dsc-cart-icon {
+  display: flex;
+  justify-content: center;
+}
+
 .dsc-cart-count {
   display: flex;
   align-items: center;
@@ -8,7 +13,7 @@
   height: 18px;
   position: relative;
   top: -10px;
-  left: -7px;
+  left: -10px;
   color: var(--white);
   background-color: var(--red);
 }

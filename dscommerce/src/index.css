@@ -114,6 +114,8 @@ nav h1 {
 nav a {
   font-size: 14px;
   font-weight: 700;
+  padding: 0;
+  margin: 0;
 }
 
 .dsc-navbar-right {
@@ -123,6 +125,8 @@ nav a {
 
 .dsc-menu-items-container {
   display: flex;
+  align-items: center;
+
 }
 
 .dsc-menu-items-container img {
