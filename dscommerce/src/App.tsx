@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { Navigate, Route, Routes, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
-import {history} from './utils/history';
+import {
+  Navigate,
+  Route,
+  Routes,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom";
+import { history } from "./utils/history";
 
 import { ContextCartCount } from "./utils/context-cart";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 import ClientHome from "./routes/ClientHome";
 import ProductDetails from "./routes/ClientHome/ProductDetails";
@@ -20,9 +26,8 @@ function App() {
       value={{ contextCartCount, setContextCartCount }}
     >
       <HistoryRouter history={history}>
-        
         <Routes>
-          <Route path="/" element={<ClientHome />}>            
+          <Route path="/" element={<ClientHome />}>
             <Route index element={<Catalog />} />
             <Route path="catalog" element={<Catalog />} />
             <Route
@@ -32,13 +37,19 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="login" element={<Login />} />
           </Route>
-          <Route path="/admin/" element={<AdminHome />}>
+          <Route
+            path="/admin/"
+            element={
+              <PrivateRoute>
+                <AdminHome />
+              </PrivateRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        
       </HistoryRouter>
     </ContextCartCount.Provider>
   );
