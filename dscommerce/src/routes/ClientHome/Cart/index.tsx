@@ -7,6 +7,7 @@ import ButtonInverseCaution from "../../../components/ButtonInverseCaution";
 
 import { OrderDTO } from "../../../models/order";
 import { ContextCartCount } from "../../../utils/context-cart";
+import { formatPrice } from "../../../utils/formatters";
 
 import * as cartService from "../../../services/cart-service";
 
@@ -68,13 +69,13 @@ export default function Cart() {
                   </div>
                 </div>
                 <div className="dsc-cart-item-right">
-                  <span>R$ {item.subTotal.toFixed(2)}</span>
+                  <span>R$ {formatPrice(item.subTotal)}</span>
                 </div>
               </div>
             ))}
 
             <div className="dsc-cart-total-container">
-              <h3>R$ {cart.total.toFixed(2)}</h3>
+              <h3>R$ {formatPrice(cart.total)}</h3>
             </div>
           </div>
         )}

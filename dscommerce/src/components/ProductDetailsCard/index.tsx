@@ -1,5 +1,6 @@
 
 import { ProductDTO } from "../../models/product";
+import { formatPrice } from "../../utils/formatters";
 import ProductCategory from "../ProductCategory";
 
 import './styles.css';
@@ -16,7 +17,7 @@ export default function ProductDetailsCard({ product }: Props) {
           <img src={product.imgUrl} alt={product.name} />
         </div>
         <div className="dsc-product-details-bottom">
-          <h3>R$ {product.price.toFixed(2)}</h3>
+          <h3>R$ {formatPrice(product.price)}</h3>
           <h4>{product.name}</h4>
           <p>{product.description}</p>
 
