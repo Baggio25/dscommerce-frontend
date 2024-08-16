@@ -17,9 +17,12 @@ import ProductDetails from "./routes/ClientHome/ProductDetails";
 import Catalog from "./routes/ClientHome/Catalog";
 import Cart from "./routes/ClientHome/Cart";
 import Login from "./routes/ClientHome/Login";
+import Confirmation from "./routes/ClientHome/Confirmation";
+
 import AdminHome from "./routes/Admin";
 import Dashboard from "./routes/Admin/Dashboard";
-import Confirmation from "./routes/ClientHome/Confirmation";
+import ProductListing from "./routes/Admin/ProductListing";
+import ProductForm from "./routes/Admin/ProductForm";
 
 import * as authService from "./services/auth-service";
 import * as cartService from "./services/cart-service";
@@ -39,53 +42,43 @@ function App() {
   }, []);
 
   return (
-    <ContextToken.Provider
-      value={{ contextTokenPayload, setContextTokenPayload }}
-    >
-      <ContextCartCount.Provider
-        value={{ contextCartCount, setContextCartCount }}
-      >
+    <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
+      <ContextCartCount.Provider value={{ contextCartCount, setContextCartCount }}>
         <HistoryRouter history={history}>
           <Routes>
             
-            <Route path="/" element={<ClientHome />}>
-            
-              <Route index element={<Catalog />} />
+            {/******** Rotas Área Pública ******/}
+            <Route path="/" element={<ClientHome />}>            
+              <Route index element={<Navigate to="/catalog" />} />
               <Route path="catalog" element={<Catalog />} />
-              
-              <Route
-                path="product-details/:productId"
-                element={<ProductDetails />}
-              />
-              
-              <Route path="cart" element={<Cart />} />
-              
-              <Route
-                path="confirmation/:orderId"
-                element={
-                  <PrivateRoute>
+              <Route path="product-details/:productId" element={<ProductDetails />} />
+              <Route path="cart" element={<Cart />} />              
+              <Route path="confirmation/:orderId" element=
+                {<PrivateRoute>
                     <Confirmation />
                   </PrivateRoute>
                 }
-              />
-              
+              />              
               <Route path="login" element={<Login />} />
-
             </Route>
+            {/*******************************/}
 
-            <Route
-              path="/admin/"
-              element={
+            {/** Rotas Área Administrativa */}
+            <Route path="/admin/" element=
+              {
                 <PrivateRoute roles={["ROLE_ADMIN"]}>
                   <AdminHome />
                 </PrivateRoute>
               }
             >
-              <Route index element={<Dashboard />} />
+              <Route index element={<Navigate to="/admin/dashboard" />} />
               <Route path="/admin/dashboard" element={<Dashboard />} />
+              <Route path="/admin/products" element={<ProductListing />} />
+              <Route path="/admin/products/:productId" element={<ProductForm />} />
             </Route>
-            <Route path="*" element={<Navigate to="/" />} />
+            {/*******************************/}
 
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
 
         </HistoryRouter>
