@@ -81,7 +81,9 @@ export default function Cart() {
         )}
 
         <div className="dsc-btn-page-container">
-          <ButtonPrimary text="Finalizar Pedido"></ButtonPrimary>
+          <Link to="/confirmation/:orderId">
+            <ButtonPrimary text="Finalizar Pedido"></ButtonPrimary>
+          </Link>
 
           <Link to="/catalog">
             <ButtonInverse text="Continuar Comprando"></ButtonInverse>

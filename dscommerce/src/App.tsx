@@ -19,6 +19,7 @@ import Cart from "./routes/ClientHome/Cart";
 import Login from "./routes/ClientHome/Login";
 import AdminHome from "./routes/Admin";
 import Dashboard from "./routes/Admin/Dashboard";
+import Confirmation from "./routes/ClientHome/Confirmation";
 
 import * as authService from "./services/auth-service";
 import * as cartService from "./services/cart-service";
@@ -50,6 +51,7 @@ function App() {
                 element={<ProductDetails />}
               />
               <Route path="cart" element={<Cart />} />
+              <Route path="confirmation/:orderId" element={<Confirmation />} />
               <Route path="login" element={<Login />} />
             </Route>
             <Route

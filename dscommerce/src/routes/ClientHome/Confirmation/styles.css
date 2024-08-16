@@ -1,0 +1,25 @@
+.dsc-confirmation-container-section {
+  padding: 20px 0;
+}
+
+.dsc-confirmation-message {
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--green);
+  background-color: var(--green-light);
+}
+
+.dsc-confirmation-message span {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+@media (min-width: 576px) {
+  .dsc-confirmation-message {
+    text-align: left;
+
+  }
+
+}
