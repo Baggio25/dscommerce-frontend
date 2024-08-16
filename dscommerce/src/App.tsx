@@ -26,11 +26,12 @@ import * as cartService from "./services/cart-service";
 
 function App() {
   const [contextCartCount, setContextCartCount] = useState<number>(0);
-  const [contextTokenPayload, setContextTokenPayload] = useState<AccessTokenPayloadDTO>();
+  const [contextTokenPayload, setContextTokenPayload] =
+    useState<AccessTokenPayloadDTO>();
 
   useEffect(() => {
     setContextCartCount(cartService.getCart().items.length);
-    
+
     if (authService.isAuthenticated()) {
       const payload = authService.getAccessTokenPayload();
       setContextTokenPayload(payload);
@@ -38,22 +39,40 @@ function App() {
   }, []);
 
   return (
-    <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
-      <ContextCartCount.Provider value={{ contextCartCount, setContextCartCount }}>
-
+    <ContextToken.Provider
+      value={{ contextTokenPayload, setContextTokenPayload }}
+    >
+      <ContextCartCount.Provider
+        value={{ contextCartCount, setContextCartCount }}
+      >
         <HistoryRouter history={history}>
           <Routes>
+            
             <Route path="/" element={<ClientHome />}>
+            
               <Route index element={<Catalog />} />
               <Route path="catalog" element={<Catalog />} />
+              
               <Route
                 path="product-details/:productId"
                 element={<ProductDetails />}
               />
+              
               <Route path="cart" element={<Cart />} />
-              <Route path="confirmation/:orderId" element={<Confirmation />} />
+              
+              <Route
+                path="confirmation/:orderId"
+                element={
+                  <PrivateRoute>
+                    <Confirmation />
+                  </PrivateRoute>
+                }
+              />
+              
               <Route path="login" element={<Login />} />
+
             </Route>
+
             <Route
               path="/admin/"
               element={
@@ -66,9 +85,10 @@ function App() {
               <Route path="/admin/dashboard" element={<Dashboard />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </HistoryRouter>
 
+          </Routes>
+
+        </HistoryRouter>
       </ContextCartCount.Provider>
     </ContextToken.Provider>
   );

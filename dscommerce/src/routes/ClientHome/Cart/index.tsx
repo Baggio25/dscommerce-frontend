@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ButtonInverse from "../../../components/ButtonInverse";
@@ -9,12 +9,13 @@ import { OrderDTO } from "../../../models/order";
 import { ContextCartCount } from "../../../utils/context-cart";
 import { formatPrice } from "../../../utils/formatters";
 
+import * as orderService from "../../../services/order-service";
 import * as cartService from "../../../services/cart-service";
 
 import "./styles.css";
 
 export default function Cart() {
-
+  const navigate = useNavigate();
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
   const { setContextCartCount } = useContext(ContextCartCount);
 
@@ -23,12 +24,21 @@ export default function Cart() {
     updateCart();
   }
 
-  function handleIncreaseItem(productId : number) {
-    cartService.increaseItem(productId); 
+  function handlePlaceOrderClick() {
+    orderService.placeOrderRequest(cart)
+      .then((response) => {
+        cartService.clearCart();
+        setContextCartCount(0);
+        navigate(`/confirmation/${response.data.id}`);
+      });
+  }
+
+  function handleIncreaseItem(productId: number) {
+    cartService.increaseItem(productId);
     setCart(cartService.getCart());
   }
 
-  function handleDecreaseItem(productId : number) {
+  function handleDecreaseItem(productId: number) {
     cartService.decreaseItem(productId);
     updateCart();
   }
@@ -60,11 +70,19 @@ export default function Cart() {
                   <div className="dsc-cart-item-description">
                     <h3>{item.name}</h3>
                     <div className="dsc-cart-item-quantity-container">
-                      <div className="dsc-cart-item-quantity-btn"
-                            onClick={() => handleDecreaseItem(item.productId)}>-</div>
+                      <div
+                        className="dsc-cart-item-quantity-btn"
+                        onClick={() => handleDecreaseItem(item.productId)}
+                      >
+                        -
+                      </div>
                       <p>{item.quantity}</p>
-                      <div className="dsc-cart-item-quantity-btn" 
-                           onClick={() => handleIncreaseItem(item.productId)}>+</div>
+                      <div
+                        className="dsc-cart-item-quantity-btn"
+                        onClick={() => handleIncreaseItem(item.productId)}
+                      >
+                        +
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -81,15 +99,15 @@ export default function Cart() {
         )}
 
         <div className="dsc-btn-page-container">
-          <Link to="/confirmation/:orderId">
+          <div onClick={handlePlaceOrderClick}>
             <ButtonPrimary text="Finalizar Pedido"></ButtonPrimary>
-          </Link>
+          </div>
 
           <Link to="/catalog">
             <ButtonInverse text="Continuar Comprando"></ButtonInverse>
           </Link>
 
-          { cart.items.length > 0 && (
+          {cart.items.length > 0 && (
             <div onClick={handleClearClick}>
               <ButtonInverseCaution text="Limpar Carrinho"></ButtonInverseCaution>
             </div>
