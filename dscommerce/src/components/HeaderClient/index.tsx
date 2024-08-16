@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import { ContextToken } from "../../utils/context-token";
 import { LoggedUser } from "../LoggedUser";
-import CartIcon from "../CartIcon";
 
 import * as authService from "../../services/auth-service";
 
+import CartIcon from "../CartIcon";
 import iconAdmin from "../../assets/images/admin.svg";
 import "./styles.css";
 

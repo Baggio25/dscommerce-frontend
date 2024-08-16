@@ -129,13 +129,19 @@ nav a {
 
 }
 
-.dsc-menu-items-container img {
+.dsc-menu-item img {
   width: 20px;
   height: 20px;
+  margin-right: 10px;
 }
 
 .dsc-menu-item {
-  margin-right: 20px;
+  display: flex;
+  margin-right: 20px; 
+}
+
+.dsc-menu-item-active {
+  font-variant: inherit;
 }
 
 .dsc-menu-item a {
