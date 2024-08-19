@@ -14,6 +14,7 @@ import editImg from "../../../assets/images/edit.svg";
 import deleteImg from "../../../assets/images/delete.svg";
 
 import "./styles.css";
+import DialogInfo from "../../../components/DialogInfo";
 
 type QueryParams = {
   page: number;
@@ -114,6 +115,8 @@ export default function ProductListing() {
           </div>
         )}
       </section>
+
+      <DialogInfo />
     </main>
   );
 }
