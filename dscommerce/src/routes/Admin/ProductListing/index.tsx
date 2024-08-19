@@ -7,6 +7,7 @@ import { formatPrice } from "../../../utils/formatters";
 import ButtonNextPage from "../../../components/ButtonNextPage";
 import SearchBar from "../../../components/SearchBar";
 import ButtonInverse from "../../../components/ButtonInverse";
+import DialogInfo from "../../../components/DialogInfo";
 
 import * as productService from "../../../services/product-service";
 
@@ -14,7 +15,6 @@ import editImg from "../../../assets/images/edit.svg";
 import deleteImg from "../../../assets/images/delete.svg";
 
 import "./styles.css";
-import DialogInfo from "../../../components/DialogInfo";
 
 type QueryParams = {
   page: number;
@@ -22,13 +22,18 @@ type QueryParams = {
 };
 
 export default function ProductListing() {
-  const [products, setProducts] = useState<ProductDTO[]>([]);
-  const [isLastPage, setIsLastPage] = useState(false);
+  const [dialogInfoData, setDialogInfoData] = useState({
+    visible: false,
+    message: "Operação concluída com sucesso!",
+  });
 
   const [queryParams, setQueryParams] = useState<QueryParams>({
     page: 0,
     name: "",
   });
+
+  const [products, setProducts] = useState<ProductDTO[]>([]);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
     productService
@@ -47,6 +52,20 @@ export default function ProductListing() {
 
   function handleNextPageClick() {
     setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+  }
+
+  function handleDialogInfoClose() {
+    setDialogInfoData({
+      ...dialogInfoData,
+      visible: false
+    })
+  }
+  
+  function handleDeleteClick() {
+    setDialogInfoData({
+      ...dialogInfoData,
+      visible: true
+    })
   }
 
   return (
@@ -103,6 +122,7 @@ export default function ProductListing() {
                     src={deleteImg}
                     alt="delete"
                     className="dsc-product-listing-btn"
+                    onClick={handleDeleteClick}
                   />
                 </td>
               </tr>
@@ -115,8 +135,12 @@ export default function ProductListing() {
           </div>
         )}
       </section>
-
-      <DialogInfo />
+      {dialogInfoData.visible && (
+        <DialogInfo
+          message={dialogInfoData.message}
+          onDialogClose={handleDialogInfoClose}
+        />
+      )}
     </main>
   );
 }

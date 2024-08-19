@@ -1,15 +1,21 @@
-
+/* eslint-disable @typescript-eslint/ban-types */
 import ButtonPrimary from "../ButtonPrimary";
 
-import "./styles.css";
+type Props = {
+  message: string;
+  onDialogClose: Function;
+};
 
-export default function DialogInfo() {
+export default function DialogInfo({message, onDialogClose}: Props) {
   return (
-    <div className="dsc-dialog-background">
-      <div className="dsc-dialog-box">
-        <h4>Operação concluída com sucesso!</h4>
-        <ButtonPrimary text="Ok!"/>
+    <div className="dsc-dialog-background" onClick={() => onDialogClose()}>
+      <div className="dsc-dialog-box" onClick={(event) => event.stopPropagation()}>
+        <h4>{message}</h4>
+
+        <div className="dsc-dialog-btn-container" onClick={() => onDialogClose()}>
+          <ButtonPrimary text="Ok!" />
+        </div>
       </div>
     </div>
-  )
+  );
 }
