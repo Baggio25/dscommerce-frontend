@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { ProductDTO } from "../../../models/product";
 import { formatPrice } from "../../../utils/formatters";
+
+import ButtonNextPage from "../../../components/ButtonNextPage";
+import SearchBar from "../../../components/SearchBar";
+import ButtonInverse from "../../../components/ButtonInverse";
 
 import * as productService from "../../../services/product-service";
 
@@ -9,8 +14,6 @@ import editImg from "../../../assets/images/edit.svg";
 import deleteImg from "../../../assets/images/delete.svg";
 
 import "./styles.css";
-import ButtonNextPage from "../../../components/ButtonNextPage";
-import SearchBar from "../../../components/SearchBar";
 
 type QueryParams = {
   page: number;
@@ -49,8 +52,11 @@ export default function ProductListing() {
     <main>
       <section className="dsc-container dsc-product-listing-section">
         <h2 className="dsc-section-title dsc-mb-20">Cadastro de Produtos</h2>
+
         <div className="dsc-btn-page-container dsc-mb-20">
-          <div className="dsc-btn dsc-btn-white">Início</div>
+          <Link to="/admin">
+            <ButtonInverse text="Início" />
+          </Link>
         </div>
 
         <SearchBar onSearch={handleSearch} />
@@ -79,7 +85,7 @@ export default function ProductListing() {
                   />
                 </td>
                 <td className="dsc-tb768">
-                  <span>R$ {formatPrice(product.id)}</span>
+                  <span>R$ {formatPrice(product.price)}</span>
                 </td>
                 <td className="dsc-txt-left">
                   <span>{product.name}</span>

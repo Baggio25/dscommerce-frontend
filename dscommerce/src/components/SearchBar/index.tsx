@@ -34,7 +34,7 @@ export default function SearchBar({ onSearch }: Props) {
         <input 
           type="text"
           value={text} 
-          placeholder="Nome do produto" 
+          placeholder="Pesquise pelo nome do produto" 
           onChange={handleChange}
         />
 
