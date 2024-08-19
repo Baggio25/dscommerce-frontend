@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 
 import { LoggedUser } from "../LoggedUser";
 
@@ -5,7 +6,6 @@ import productImg from "../../assets/images/products.svg";
 import homeImg from "../../assets/images/home.svg";
 
 import "./styles.css";
-import { NavLink } from "react-router-dom";
 
 export default function HeaderAdmin() {
   return (
