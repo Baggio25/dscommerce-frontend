@@ -8,6 +8,7 @@ import ButtonNextPage from "../../../components/ButtonNextPage";
 import SearchBar from "../../../components/SearchBar";
 import ButtonInverse from "../../../components/ButtonInverse";
 import DialogInfo from "../../../components/DialogInfo";
+import DialogConfirmation from "../../../components/DialogConfirmation";
 
 import * as productService from "../../../services/product-service";
 
@@ -25,6 +26,11 @@ export default function ProductListing() {
   const [dialogInfoData, setDialogInfoData] = useState({
     visible: false,
     message: "Operação concluída com sucesso!",
+  });
+ 
+  const [dialogConfirmationData, setDialogConfirmationData] = useState({
+    visible: false,
+    message: "Deseja realmente excluir o registro?",
   });
 
   const [queryParams, setQueryParams] = useState<QueryParams>({
@@ -62,9 +68,17 @@ export default function ProductListing() {
   }
   
   function handleDeleteClick() {
-    setDialogInfoData({
-      ...dialogInfoData,
+    setDialogConfirmationData({
+      ...dialogConfirmationData,
       visible: true
+    })
+  }
+
+  function handleDialogConfirmationAnswer(answer: boolean) {
+    console.log("Resposta: " + answer);
+    setDialogConfirmationData({
+      ...dialogConfirmationData,
+      visible: false
     })
   }
 
@@ -135,10 +149,18 @@ export default function ProductListing() {
           </div>
         )}
       </section>
+
       {dialogInfoData.visible && (
         <DialogInfo
           message={dialogInfoData.message}
           onDialogClose={handleDialogInfoClose}
+        />
+      )}
+      
+      {dialogConfirmationData.visible && (
+        <DialogConfirmation
+          message={dialogConfirmationData.message}
+          onDialogAnswer={handleDialogConfirmationAnswer}
         />
       )}
     </main>
