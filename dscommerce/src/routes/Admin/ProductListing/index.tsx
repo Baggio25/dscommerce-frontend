@@ -30,6 +30,7 @@ export default function ProductListing() {
  
   const [dialogConfirmationData, setDialogConfirmationData] = useState({
     visible: false,
+    id: 0,
     message: "Deseja realmente excluir o registro?",
   });
 
@@ -67,15 +68,33 @@ export default function ProductListing() {
     })
   }
   
-  function handleDeleteClick() {
+  function handleDeleteClick(productId: number) {
     setDialogConfirmationData({
       ...dialogConfirmationData,
+      id: productId,
       visible: true
     })
   }
 
-  function handleDialogConfirmationAnswer(answer: boolean) {
-    console.log("Resposta: " + answer);
+  function handleDialogConfirmationAnswer(answer: boolean, productId: number) {
+    if (answer) {
+      productService.deleteById(productId)
+        .then(() => {
+          setProducts([]);
+          setQueryParams({ ...queryParams, page: 0 });
+          setDialogInfoData({
+            visible: true,
+            message: "Registro excluído com sucesso!"
+          })
+        })
+        .catch((error) => {
+          setDialogInfoData({
+            visible: true,
+            message: error.response.data.error
+          })
+        })
+    }
+
     setDialogConfirmationData({
       ...dialogConfirmationData,
       visible: false
@@ -136,7 +155,7 @@ export default function ProductListing() {
                     src={deleteImg}
                     alt="delete"
                     className="dsc-product-listing-btn"
-                    onClick={handleDeleteClick}
+                    onClick={() => handleDeleteClick(product.id)}
                   />
                 </td>
               </tr>
@@ -159,6 +178,7 @@ export default function ProductListing() {
       
       {dialogConfirmationData.visible && (
         <DialogConfirmation
+          id={dialogConfirmationData.id}
           message={dialogConfirmationData.message}
           onDialogAnswer={handleDialogConfirmationAnswer}
         />
